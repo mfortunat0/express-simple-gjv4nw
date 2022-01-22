@@ -15,14 +15,12 @@ export class POIService {
   }
 
   find({ x, y }: POIDto) {
-    const pois = this.POIs.filter(
-      ({ x: X, y: Y }) =>
-        (x - X <= 10 || x - X >= -10) && (y - Y <= 10 || y - Y >= -10)
-    ).map(
-      (poi) =>
-        ({ name }) =>
-          name
-    );
+    console.log(x, y);
+    const pois = this.POIs.filter(({ x: X, y: Y }) => {
+      const absX = Math.abs(x - X);
+      const absY = Math.abs(y - Y);
+      return absX + absY <= 10;
+    });
     return pois;
   }
 }
