@@ -7,12 +7,12 @@ export class POIController {
   create(request: Request, response: Response) {
     const { name, x, y } = request.body;
     if (name && parseInt(x) > -1 && parseInt(y) > -1) {
+      console.log(x, y);
+      console.log(this.poiServices instanceof POIService);
       const poi = this.poiServices.create({ name, x, y });
       response.status(201).json(poi);
     }
-    response.status(400).json({
-      error: 'Bad request',
-    });
+    response.status(400).send();
   }
 
   find(request: Request, response: Response) {
